@@ -36,26 +36,34 @@ func main() {
 	}
 
 	// delete from slice
+	// {
+	// 	fmt.Println("before change-------------")
+	// 	xi:=[]int{00,10,20,30,40,50,60,70}
+	// 	fmt.Println(xi)
+	// 	fmt.Printf("the content of xi2 is: %v\n",xi)
+	// 	fmt.Printf("the lenght is: %v\n",len(xi))
+	// 	fmt.Printf("the initial capacity is: %v\n",cap(xi))
+	// 	// remove 40
+	// 	fmt.Println("after change-------------")
+	// 	// xi=append(xi[:4], xi[5:]...)
+	// 	xi = append(xi, 80,90)
+	// 	fmt.Println(xi)
+	// 	fmt.Printf("the content of xi2 is: %v\n",xi)
+	// 	fmt.Printf("the lenght is: %v\n",len(xi))
+	// 	fmt.Printf("the initial capacity is: %v\n",cap(xi))
+	// 	fmt.Println("xi2-------------")
+	// 	xi2:=make([]int,2,10)
+	// 	fmt.Printf("the content of xi2 is: %v\n",xi2)
+	// 	fmt.Printf("the lenght is: %v\n",len(xi2))
+	// 	fmt.Printf("the initial capacity is: %v\n",cap(xi2))
+	// }
+
 	{
-		fmt.Println("before change-------------")
-		xi:=[]int{00,10,20,30,40,50,60,70}
-		fmt.Println(xi)
-		fmt.Printf("the content of xi2 is: %v\n",xi)
-		fmt.Printf("the lenght is: %v\n",len(xi))
-		fmt.Printf("the initial capacity is: %v\n",cap(xi))
-		// remove 40
-		fmt.Println("after change-------------")
-		// xi=append(xi[:4], xi[5:]...)
-		xi = append(xi, 80,90)
-		fmt.Println(xi)
-		fmt.Printf("the content of xi2 is: %v\n",xi)
-		fmt.Printf("the lenght is: %v\n",len(xi))
-		fmt.Printf("the initial capacity is: %v\n",cap(xi))
-		fmt.Println("xi2-------------")
-		xi2:=make([]int,2,10)
-		fmt.Printf("the content of xi2 is: %v\n",xi2)
-		fmt.Printf("the lenght is: %v\n",len(xi2))
-		fmt.Printf("the initial capacity is: %v\n",cap(xi2))
+		xc:= []string{"black","white","red","green"}
+		xf:=[]string{"mango","fufu","pizza","balango"}
+
+		xxw:=[][]string{xc,xf}
+		fmt.Println(xxw)
 	}
 
 }
