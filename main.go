@@ -1,32 +1,35 @@
 package main
 
-import (
-	"bytes"
-	"fmt"
-	"io"
-	"log"
-	"os"
-)
+import "fmt"
 
-type Person struct {
-	first string
+// a func that retruns an int
+func foo() int  {
+	return 31
+}
+// a func that returns a differnet func
+func bar() (func()int){
+	return foo
 }
 
-// mimicing go internals - like logInfo in v1.0.6
-func (p Person) writeOut(w io.Writer) {
-	 w.Write([]byte(p.first))
-
-}
 
 func main() {
-	p:=Person{first: "Ginny"}
-	f,err:=os.Create("output.txt");if err!=nil{log.Fatal(err)};defer f.Close()
+	y:=bar()
+	fmt.Println(y())
 
-	var b bytes.Buffer
+	// THIS IS COO;L;;
+	// fmt.Printf("%T",fmt.Println)
+	// fmt.Println(x)
 
-	p.writeOut(f)
-	p.writeOut(&b)
-	fmt.Println(b.String())
+	result:=opp(1,1,add)
+	fmt.Println(result)
+}
+func opp(a,b int,f func(int,int)int) int {
+	return f(a,b)
+}
 
-	// how is the buffer memory space released
+func add(a,b int) int  {
+	return a+b
+}
+func sub(a,b int )int   {
+	return a-b
 }
