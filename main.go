@@ -1,56 +1,32 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
+	"io"
 	"log"
-	"strconv"
+	"os"
 )
 
-type book struct {
-	title string
+type Person struct {
+	first string
 }
 
-func (b book) String() string {
-	return fmt.Sprintf("The title of the Book is %v", b.title)
+// mimicing go internals - like logInfo in v1.0.6
+func (p Person) writeOut(w io.Writer) {
+	 w.Write([]byte(p.first))
+
 }
-
-type count int
-
-func (c count) String() string {
-	return fmt.Sprintf("This is the number %v", strconv.Itoa(int(c)))
-}
-
-// now book and count are also of type stringer, so go itnernal will print them as depicted here
-
-func logInfo(s fmt.Stringer) {
-	log.Println("LOG FROM 138", s.String())
-}
-
-// type foo interface {
-// 	foofunc()
-// }
-
-// type bar struct{}
-
-// func (b bar) foofunc() {}
-
-// func acceptor(f foo) {}
 
 func main() {
-	// var ba bar
-	// acceptor(ba)
+	p:=Person{first: "Ginny"}
+	f,err:=os.Create("output.txt");if err!=nil{log.Fatal(err)};defer f.Close()
 
-	b := book{
-		title: "gold and water",
-	}
-	var c count = 4
+	var b bytes.Buffer
 
-	fmt.Printf("%v\n", b)
-	x := fmt.Sprintln(c)
-	fmt.Println(x)
+	p.writeOut(f)
+	p.writeOut(&b)
+	fmt.Println(b.String())
 
-	// acceptor function
-	logInfo(b)
-	// notice how differntlyy it println prints them
-
+	// how is the buffer memory space released
 }
