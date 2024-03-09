@@ -1,44 +1,65 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"golang.org/x/exp/constraints"
+)
 
-type dog struct{
-	name string
+// type set
+type MyTS interface{
+	// int | float64
+	// ~int | ~float64
+	constraints.Integer | constraints.Float
 }
 
-func (d dog)walk()  {
-	fmt.Println("my name is ",d.name," and i like to walk")
-}
-func (d *dog)run()  {
-	n2:=d.name
-	d.name="rudolf"
-	fmt.Printf("i am no longer %v, now i am %v and i love to run!!!\n",n2,d.name)
+// generics
+func add[T MyTS,U comparable](a, b T,c U) T {
+	return a+b
 }
 
-type youngin interface{
-	walk()
-	run()
+// type alias and underlying type constraints
+type seconds int
+
+type minutes = int
+
+/*
+type MyStruct struct {
+	// Frequently accessed fields first
+	ID   int
+	Name string
+
+	// Group related fields together
+	Location struct {
+		Latitude  float64
+		Longitude float64
+	}
+
+	// Less frequently accessed or larger fields
+	Data []byte
+	Flag bool
 }
 
-func youngRun(y youngin) {
-	fmt.Println("young young young")
-	y.run()
+func main() {
+	m := MyStruct{
+		ID:   1,
+		Name: "futa",
+		Location: struct {
+			Latitude  float64
+			Longitude float64
+		}{
+			Latitude:  12.22,
+			Longitude: 12.22},
+		Data: []byte("gold"),
+		Flag: true}
+	m.Location.Latitude=12.33
 }
-
+*/
 
 func main()  {
-	d1:=dog{name: "Henry"}
-	d1.walk()
-	d1.run()
-	// this is NOT possible
-	// youngRun(d1)
-	
+	var n seconds = 20
 
-	d2:=&dog{name: "Padget"}
-	d2.walk()
-	d2.run()
-	// this is possible
-	youngRun(d2)
+	// man:=map[MyTS]string{}
 
-
+	// var m minutes = 10
+	fmt.Println(add(n,2,"goof"))
 }
