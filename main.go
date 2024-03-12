@@ -6,19 +6,18 @@ func main() {
 
 	c := make(chan int)
 
-	go foo(c)
+	go func(chan<- int) {
+		for i := 0; i < 5; i++ {
+			c <- i
+		}
+		close(c)
+	}(c)
 
 	// u could use a wait group. 
 	// but running bar in the main goroutine blocks it enough
-	go bar(c)
+	for v := range c{
+		fmt.Println(v)
+	}
 
 	fmt.Println("about to exit")
-}
-
-func foo(c chan<- int) {
-	c <- 42
-}
-
-func bar(c <-chan int) {
-	fmt.Println(<-c)
 }
